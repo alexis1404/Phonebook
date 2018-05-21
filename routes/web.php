@@ -25,5 +25,10 @@ Route::get('user_phones/{user_id}', 'MainTelephoneController@userPhones')->name(
 
 Route::post('add_phone/{user_id}', 'MainTelephoneController@addPhone')->name('add_phone');
 
+Route::get('phone_delete/{phone_id}', 'MainTelephoneController@phone_delete')->name('phone_delete');
+
+Route::get('phone_edit_page/{phone_id}', 'MainTelephoneController@editPhonePage')->name('phone_edit_page');
+
+Route::post('phone_edit/{phone_id}', 'MainTelephoneController@editPhone')->name('phone_edit');
 
 

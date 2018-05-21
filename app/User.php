@@ -36,7 +36,7 @@ class User extends Authenticatable
     {
         $phones = $this->phones();
 
-        if($phones->count() > 10){
+        if($phones->count() < 10){
 
             $this->phones()->save($phone);
 

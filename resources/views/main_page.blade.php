@@ -26,6 +26,7 @@
 @yield('content')
 @yield('user_edit_form')
 @yield('phone_list')
+@yield('phone_edit_form')
 
 </body>
 </html>

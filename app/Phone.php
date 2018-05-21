@@ -15,9 +15,18 @@ class Phone extends Model
         return $this->belongsTo('App\User');
     }
 
-    public function editNumber($number)
+    public function editNumber($number = false, $description = false)
     {
-        $this->number = $number;
+        if($number){
+            $this->number = $number;
+        }
+
+        if($description){
+            $this->description = $description;
+
+        }
+
+        $this->save();
     }
 
     /**

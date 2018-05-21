@@ -18,12 +18,12 @@
                     <form action="{{route('user_create')}}" method="POST" enctype="multipart/form-data">
                         {{csrf_field()}}
                         <div class="form-group">
-                            <label for="name" class="col-form-label">Имя:</label>
-                            <input type="text" class="form-control" id="name" name="name" required>
-                        </div>
-                        <div class="form-group">
                             <label for="last_name" class="col-form-label">Фамилия:</label>
                             <input type="text" class="form-control" id="last_name" name="last_name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="name" class="col-form-label">Имя:</label>
+                            <input type="text" class="form-control" id="name" name="name" required>
                         </div>
                         <div class="form-group">
                             <label for="pat" class="col-form-label">Отчество:</label>

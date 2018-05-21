@@ -18,11 +18,15 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form action="" method="POST" enctype="multipart/form-data">
+                        <form action="/add_phone/{{$user_id}}" method="POST" enctype="multipart/form-data">
                             {{csrf_field()}}
                             <div class="form-group">
-                                <label for="p_number" class="col-form-label">Номер телефона в формате +380-xx-ххх-хх-хх:</label>
-                                <input type="tel" class="form-control" id="p_number" name="p_number" pattern="\+380-([0-9]{2})-([0-9]{3})-([0-9]{2})-([0-9]{2})" required>
+                                <label for="number" class="col-form-label">Номер телефона в формате +380-xx-ххх-хх-хх:</label>
+                                <input type="tel" class="form-control" id="number" name="number" pattern="\+380-([0-9]{2})-([0-9]{3})-([0-9]{2})-([0-9]{2})" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="desc" class="col-form-label">Краткое описание:</label>
+                                <input type="text" class="form-control" id="desc" name="desc" required>
                             </div>
                             <button type="submit" class="btn btn-primary">Создать</button>
                         </form>
@@ -37,9 +41,15 @@
         @if($phones->isEmpty())
             <h4 align="center">Список номеров пользователя пока пуст</h4>
         @else
+            <ul class="list-group">
+                @foreach($phones as $phone)
+                    <li class="list-group-item "><b>{{$phone->number}}</b> ------- {{$phone->description}} --------
+                        <a href="/phone_delete/{{$phone->id}}" class="float-right" style="margin-right: 10px"><i class="far fa-trash-alt"> </i></a>
+                        <a href="/phone_edit_page/{{$phone->id}}" class="float-right"><i class="fas fa-edit" style="margin-right: 10px"> </i></a>
+                    </li>
 
-
-
+                @endforeach
+            </ul>
         @endif
 
         @if (session('message'))
@@ -51,6 +61,16 @@
         @if (session('message_err'))
             <div class="alert alert-warning" style="margin-top: 20%">
                 {{ session('message_err') }}
+            </div>
+        @endif
+
+        @if (count($errors) > 0)
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
             </div>
         @endif
 

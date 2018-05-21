@@ -44,7 +44,7 @@ class MainTelephoneController extends Controller
 
     public function userEditPage($id_user)
     {
-        return view('custom_page.user_edit_form', ['id_user' => $id_user]);
+        return view('custom_page.user_edit_form', ['user' => $this->userRepo->getUserForId($id_user)]);
     }
 
     public function editUser(Request $request, $user_id)
@@ -62,12 +62,37 @@ class MainTelephoneController extends Controller
 
     public function addPhone(Request $request, $user_id)
     {
-        $result = $this->phone_repo->createPhone($request->p_number, $user_id);
+        $this->validate($request, [
+            'number' => 'required|unique:phones|max:70',
+            'desc' => 'required|max:100'
+        ]);
+
+        $result = $this->phone_repo->createPhone($request->number, $request->desc, $user_id);
 
         if($result){
             return redirect()->back()->with('message', 'Номер успешно сохранен');
         }
 
         return redirect()->back()->with('message_err', 'Ошибка! В телефонной книге пользователя не может быть более 10 номеров!');
+    }
+
+    public function phone_delete($phone_id)
+    {
+        $this->phone_repo->deletePhone($phone_id);
+
+        return redirect()->back()->with('message', 'Номер удален');
+    }
+
+    public function editPhonePage($phone_id)
+    {
+        return view('custom_page.phone_edit_form', ['phone' => $this->phone_repo->getPhoneForId($phone_id)]);
+    }
+
+    public function editPhone(Request $request, $phone_id)
+    {
+        $this->phone_repo->editPhone($phone_id, $request->number, $request->desc);
+
+        return redirect('/')->with('message', 'Данные номера успешно изменены');
+
     }
 }
