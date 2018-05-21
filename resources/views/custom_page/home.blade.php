@@ -48,9 +48,9 @@
             <ul class="list-group">
                 @foreach($users as $user)
                     <li class="list-group-item ">{{$user->last_name}} {{$user->name}} {{$user->pat}}
-                        <a href="/user_phones/{{$user->id}}" class="float-right" style="margin-right: 10px"><i class="fas fa-phone"> </i></a>
-                        <a href="/user_edit_page/{{$user->id}}" class="float-right"><i class="fas fa-edit" style="margin-right: 10px"> </i></a>
-                        <a href="/user_delete/{{$user->id}}" class="float-right" style="margin-right: 10px"><i class="far fa-trash-alt"> </i></a>
+                        <a href="/user_phones/{{$user->id}}" class="float-right" style="margin-right: 10px"><i class="fas fa-phone" data-toggle="tooltip" data-placement="top" title="Телефоны пользователя"> </i></a>
+                        <a href="/user_edit_page/{{$user->id}}" class="float-right"><i class="fas fa-edit" style="margin-right: 10px" data-toggle="tooltip" data-placement="top" title="Редактировать данные пользователя"> </i></a>
+                        <a href="/user_delete/{{$user->id}}" class="float-right" style="margin-right: 10px"><i class="far fa-trash-alt" data-toggle="tooltip" data-placement="top" title="Удалить пользователя"> </i></a>
                     </li>
                     @endforeach
             </ul>

@@ -21,8 +21,8 @@
                         <form action="/add_phone/{{$user_id}}" method="POST" enctype="multipart/form-data">
                             {{csrf_field()}}
                             <div class="form-group">
-                                <label for="number" class="col-form-label">Номер телефона в формате +380-xx-ххх-хх-хх:</label>
-                                <input type="tel" class="form-control" id="number" name="number" pattern="\+380-([0-9]{2})-([0-9]{3})-([0-9]{2})-([0-9]{2})" required>
+                                <label for="number" class="col-form-label">Номер телефона в формате 380xx-xxx-xxxx:</label>
+                                <input type="tel" class="form-control" id="number" name="number" required>
                             </div>
                             <div class="form-group">
                                 <label for="desc" class="col-form-label">Краткое описание:</label>
@@ -44,8 +44,8 @@
             <ul class="list-group">
                 @foreach($phones as $phone)
                     <li class="list-group-item "><b>{{$phone->number}}</b> ------- {{$phone->description}} --------
-                        <a href="/phone_delete/{{$phone->id}}" class="float-right" style="margin-right: 10px"><i class="far fa-trash-alt"> </i></a>
-                        <a href="/phone_edit_page/{{$phone->id}}" class="float-right"><i class="fas fa-edit" style="margin-right: 10px"> </i></a>
+                        <a href="/phone_delete/{{$phone->id}}" class="float-right" style="margin-right: 10px"><i class="far fa-trash-alt" data-toggle="tooltip" data-placement="top" title="Удалить номер"> </i></a>
+                        <a href="/phone_edit_page/{{$phone->id}}" class="float-right"><i class="fas fa-edit" style="margin-right: 10px" data-toggle="tooltip" data-placement="top" title="Изменить номер"> </i></a>
                     </li>
 
                 @endforeach
@@ -75,5 +75,13 @@
         @endif
 
     </div>
+
+    <script>
+        $.jMaskGlobals = {translation: {
+                'n': {pattern: /\d/},
+            }
+        };
+        $('#number').mask('+380nn-nnn-nnnn').val('+380');
+    </script>
 
     @endsection
